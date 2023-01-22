@@ -1,26 +1,42 @@
-pub struct NumberConverter {}
+use crate::replace_interface::ReplaceInterface;
+
+pub struct NumberConverter {
+    pub rules: Vec<Box<dyn ReplaceInterface>>,
+}
 
 impl NumberConverter {
     pub fn convert(&self, num: u32) -> String {
-        if num % 3 == 0 && num % 5 == 0 {
-            "FizzBuzz".to_string()
-        } else if num % 3 == 0 {
-            "Fizz".to_string()
-        } else if num % 5 == 0 {
-            "Buzz".to_string()
-        } else {
-            num.to_string()
-        }
+        self.rules.iter().fold("".to_string(), |carry, rule| {
+            if rule.matching(carry.clone(), num) {
+                rule.apply(carry, num)
+            } else {
+                carry
+            }
+        })
     }
 }
 
 #[cfg(test)]
 mod tests {
     use crate::number_converter::NumberConverter;
+    use crate::replace_interface::ReplaceInterface;
+    use crate::rules::cyclic_number_rule::CyclicNumberRule;
+    use crate::rules::pass_through_rule::PassThroughRule;
 
     #[test]
     fn test_convert() {
-        let fizz_buzz = NumberConverter {};
+        let rules: Vec<Box<dyn ReplaceInterface>> = vec![
+            Box::new(CyclicNumberRule {
+                base: 3,
+                replacement: "Fizz".to_string(),
+            }),
+            Box::new(CyclicNumberRule {
+                base: 5,
+                replacement: "Buzz".to_string(),
+            }),
+            Box::new(PassThroughRule {}),
+        ];
+        let fizz_buzz = NumberConverter { rules };
         assert_eq!("1".to_string(), fizz_buzz.convert(1));
         assert_eq!("2".to_string(), fizz_buzz.convert(2));
         assert_eq!("Fizz".to_string(), fizz_buzz.convert(3));
