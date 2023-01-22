@@ -1,7 +1,5 @@
-#[warn(dead_code)]
 pub struct NumberConverter {}
 
-#[warn(dead_code)]
 impl NumberConverter {
     pub fn convert(&self, num: u32) -> String {
         if num % 3 == 0 && num % 5 == 0 {
