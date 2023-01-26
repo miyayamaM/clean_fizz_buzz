@@ -18,17 +18,15 @@ impl<T: ConverterInterface, S: OutputInterface> FizzBuzzSequencePrinter<T, S> {
 
 #[cfg(test)]
 mod tests {
-    #[double]
-    use crate::number_converter::NumberConverter;
+    use crate::number_converter::MockNumberConverter;
     use crate::output_interface::MockOutputInterface;
-    use mockall_double::double;
 
     use super::FizzBuzzSequencePrinter;
 
     #[test]
     fn test_print_1_to_3() {
         //converterのmock作成
-        let mut mock_converter = NumberConverter::new();
+        let mut mock_converter = MockNumberConverter::new();
         mock_converter
             .expect_convert()
             .times(3)

@@ -7,4 +7,3 @@ edition = "2021"
 
 [dependencies]
 mockall = "0.11.3"
-mockall_double = "0.3.0"
