@@ -1,11 +1,14 @@
+use crate::converter_interface::ConverterInterface;
 use crate::replace_interface::ReplaceInterface;
+use mockall::automock;
 
 pub struct NumberConverter {
     pub rules: Vec<Box<dyn ReplaceInterface>>,
 }
 
-impl NumberConverter {
-    pub fn convert(&self, num: u32) -> String {
+#[automock]
+impl ConverterInterface for NumberConverter {
+    fn convert(&self, num: u32) -> String {
         self.rules.iter().fold("".to_string(), |carry, rule| {
             if rule.matching(carry.clone(), num) {
                 rule.apply(carry, num)
@@ -18,6 +21,7 @@ impl NumberConverter {
 
 #[cfg(test)]
 mod tests {
+    use crate::converter_interface::ConverterInterface;
     use crate::number_converter::NumberConverter;
     use crate::replace_interface::ReplaceInterface;
     use crate::rules::cyclic_number_rule::CyclicNumberRule;

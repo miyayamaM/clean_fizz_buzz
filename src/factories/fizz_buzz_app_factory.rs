@@ -8,7 +8,7 @@ use crate::rules::pass_through_rule::PassThroughRule;
 pub struct FizzBuzzAppFactory {}
 
 impl FizzBuzzAppFactory {
-    pub fn create(&self) -> FizzBuzzSequencePrinter<ConsoleOutput> {
+    pub fn create(&self) -> FizzBuzzSequencePrinter<NumberConverter, ConsoleOutput> {
         FizzBuzzSequencePrinter {
             fizzbuzz: self.create_fizz_buzz(),
             output: self.create_output(),
