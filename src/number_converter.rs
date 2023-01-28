@@ -69,6 +69,27 @@ mod tests {
         assert_eq!("FizzBuzz".to_string(), converter.convert(1));
     }
 
+    #[test]
+    fn test_convert_skipping_unmatched_rules() {
+        let rules: Vec<Box<dyn ReplaceInterface>> = vec![
+            Box::new(create_mock_rule(
+                "".to_string(),
+                1,
+                "Fizz".to_string(),
+                false,
+            )),
+            Box::new(create_mock_rule(
+                "".to_string(),
+                1,
+                "Buzz".to_string(),
+                false,
+            )),
+            Box::new(create_mock_rule("".to_string(), 1, "1".to_string(), true)),
+        ];
+        let converter = NumberConverter { rules };
+        assert_eq!("1".to_string(), converter.convert(1));
+    }
+
     fn create_mock_rule(
         expected_carry: String,
         expected_num: u32,
