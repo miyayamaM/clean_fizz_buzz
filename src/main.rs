@@ -1,7 +1,6 @@
-use clean_fizz_buss::factories::fizz_buzz_app_factory::FizzBuzzAppFactory;
+use clean_fizz_buss::create_printer;
 
 fn main() {
-    let factory = FizzBuzzAppFactory {};
-    let printer = factory.create();
+    let printer = create_printer();
     printer.print_range(0, 100)
 }
