@@ -1,9 +1,9 @@
-use crate::number_converter::NumberConverter;
-use crate::outputs::console_output::ConsoleOutput;
-use crate::printer::FizzBuzzSequencePrinter;
-use crate::replace_interface::ReplaceInterface;
-use crate::rules::cyclic_number_rule::CyclicNumberRule;
-use crate::rules::pass_through_rule::PassThroughRule;
+use clean_fizz_buzz::number_converter::NumberConverter;
+use clean_fizz_buzz::outputs::console_output::ConsoleOutput;
+use clean_fizz_buzz::printer::FizzBuzzSequencePrinter;
+use clean_fizz_buzz::replace_interface::ReplaceInterface;
+use clean_fizz_buzz::rules::cyclic_number_rule::CyclicNumberRule;
+use clean_fizz_buzz::rules::pass_through_rule::PassThroughRule;
 
 pub struct FizzBuzzAppFactory {}
 
