@@ -1,5 +1,5 @@
 [package]
-name = "clean_fizz_buss"
+name = "clean_fizz_buzz"
 version = "0.1.0"
 edition = "2021"
 
