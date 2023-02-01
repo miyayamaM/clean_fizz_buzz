@@ -23,7 +23,7 @@ impl<T: ConverterInterface, S: OutputInterface> FizzBuzzSequencePrinter<T, S> {
 
 #[cfg(test)]
 mod tests {
-    use crate::number_converter::MockNumberConverter;
+    use crate::converter_interface::MockConverterInterface;
     use crate::output_interface::MockOutputInterface;
 
     use super::FizzBuzzSequencePrinter;
@@ -31,7 +31,7 @@ mod tests {
     #[test]
     fn test_print_none() {
         //converterのmock作成
-        let mut mock_converter = MockNumberConverter::new();
+        let mut mock_converter = MockConverterInterface::new();
         mock_converter
             .expect_convert()
             .never()
@@ -51,7 +51,7 @@ mod tests {
     #[test]
     fn test_print_1_to_3() {
         //converterのmock作成
-        let mut mock_converter = MockNumberConverter::new();
+        let mut mock_converter = MockConverterInterface::new();
         mock_converter
             .expect_convert()
             .times(3)

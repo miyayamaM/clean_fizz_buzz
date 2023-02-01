@@ -1,12 +1,10 @@
 use crate::converter_interface::ConverterInterface;
 use crate::replace_interface::ReplaceInterface;
-use mockall::automock;
 
 pub struct NumberConverter {
     pub rules: Vec<Box<dyn ReplaceInterface>>,
 }
 
-#[automock]
 impl ConverterInterface for NumberConverter {
     fn convert(&self, num: u32) -> String {
         self.rules.iter().fold("".to_string(), |carry, rule| {
